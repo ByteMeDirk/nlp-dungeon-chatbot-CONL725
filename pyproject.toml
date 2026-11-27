@@ -1,0 +1,50 @@
+[project]
+name = "dmbot"
+version = "0.1.0"
+description = "NLP dungeon master chatbot (CONL725)"
+authors = [{ name = "Dirk Steynberg", email = "bytemedirk@proton.me" }]
+requires-python = ">=3.12"
+dependencies = [
+  "nltk>=3.10.4",
+  "pydantic>=2.14.4",
+  "pyyaml>=6.0.4",
+  "sqlalchemy>=2.1.9",
+  "sqlmodel>=0.0.50",
+  "textual>=8.2.8",
+  "torch>=2.15.0",
+]
+
+[project.scripts]
+dmbot = "dmbot.cli:main"
+# ToDo: add more scripts here
+
+[build-system]
+requires = ["uv_build>=0.11.7,<0.12.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+  "pyright>=1.1.414",
+  "pytest>=9.2.0",
+  "ruff>=0.17.6",
+  "types-pyyaml>=6.0.12.20261122",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.pyright]
+include = ["src", "tests"]
+pythonVersion = "3.12"
+typeCheckingMode = "strict"
+venvPath = "."
+venv = ".venv"
+reportMissingTypeStubs = false
